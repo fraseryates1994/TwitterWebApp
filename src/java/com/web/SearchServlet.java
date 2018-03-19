@@ -62,7 +62,7 @@ public class SearchServlet extends HttpServlet {
                 TwitterWrapper tw2 = new TwitterWrapper();
                 ArrayList replies = tw2.getDiscussion2(statuses.get(replyIndex));
 
-                if (replies.size() == 0) {
+                if (replies.isEmpty()) {
                     request.setAttribute("error", "No replies");
                     RequestDispatcher view3 = request.getRequestDispatcher("searchPage.jsp");
                     view3.forward(request, response);
@@ -73,9 +73,9 @@ public class SearchServlet extends HttpServlet {
                 dem.setDemographics(replies);
 
                 request.setAttribute("avgFriends", dem.getTotalFriends() / replies.size());
-                request.setAttribute("mostFriends", dem.getMostFriends().getScreenName());
+                request.setAttribute("mostFriends", dem.getMostFriends());
                 request.setAttribute("avgFollowers", dem.getTotalFollowers() / replies.size());
-                request.setAttribute("mostFollowers", dem.getMostFollowers().getScreenName());
+                request.setAttribute("mostFollowers", dem.getMostFollowers());
                 request.setAttribute("location", dem.getLocationReplies());
                 request.setAttribute("positiveEmoji", dem.getPositiveEmojiReplies());
                 request.setAttribute("negativeEmoji", dem.getNegativeEmojiReplies());
