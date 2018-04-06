@@ -5,8 +5,13 @@
  */
 package com.web;
 
+import com.model.JDBCWrapper;
+import com.model.Results;
+import com.model.SocialMediaDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +35,15 @@ public class GAServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
+        JDBCWrapper wr = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/SocialMedia", "social", "fraz");
+        SocialMediaDB db = new SocialMediaDB(wr);
+
+        ArrayList<Results> results = db.getAllResults();
+        request.setAttribute("results", results);
+
+        // refresh page
+        RequestDispatcher view2 = request.getRequestDispatcher("searchPage.jsp");
+        view2.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

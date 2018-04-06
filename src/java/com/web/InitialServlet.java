@@ -5,8 +5,12 @@
  */
 package com.web;
 
+import com.model.JDBCWrapper;
+import com.model.Results;
+import com.model.SocialMediaDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +35,8 @@ public class InitialServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-         String button = request.getParameter("button");
+
+        String button = request.getParameter("button");
 
         switch (button) {
             case "search":
@@ -40,6 +44,13 @@ public class InitialServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "ga":
+                JDBCWrapper wr = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/SocialMedia", "social", "fraz");
+                SocialMediaDB db = new SocialMediaDB(wr);
+
+                ArrayList<Results> results = db.getAllResults();
+                request.setAttribute("results", results);
+
+                // refresh page
                 RequestDispatcher view2 = request.getRequestDispatcher("gaPage.jsp");
                 view2.forward(request, response);
                 break;

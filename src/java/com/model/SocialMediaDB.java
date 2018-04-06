@@ -35,6 +35,21 @@ public class SocialMediaDB {
         }
         return ret;
     }
+    
+    public ArrayList<Results> getAllResults() {
+        ArrayList ret = new ArrayList<Results>();
+        wrapper.createStatement();
+        wrapper.createResultSet("SELECT * FROM results");
+        try {
+            wrapper.getResultSet().next();
+            do {
+                ret.add(new Results(wrapper.getResultSet().getString("ruleBase"), wrapper.getResultSet().getDouble("mutationRate"), wrapper.getResultSet().getInt("populationSize"), wrapper.getResultSet().getString("fitness")));
+            } while (wrapper.getResultSet().next());
+        } catch (SQLException ex) {
+            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
+    }
 
     public ArrayList<String> getAllPositiveWords() {
         ArrayList ret = new ArrayList<String>();
@@ -151,8 +166,6 @@ public class SocialMediaDB {
         }
         return ret;
     }
-
-
 
     public void createTable(String tableName) {
         try {
