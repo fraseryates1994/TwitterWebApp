@@ -11,8 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Something went wrong...</title>
-
     </head>
+    
     <body>
         <div id="page">
             <header id="header">
