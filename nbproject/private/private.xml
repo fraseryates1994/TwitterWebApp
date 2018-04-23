@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Fraser/Google%20Drive/GitProjects/TwitterWebApp/web/errorPage.jsp</file>
-            <file>file:/C:/Users/Fraser/Google%20Drive/GitProjects/TwitterWebApp/web/searchPage.jsp</file>
-            <file>file:/C:/Users/Fraser/Google%20Drive/GitProjects/TwitterWebApp/web/index.html</file>
+            <file>file:/C:/Users/Fraser/Google%20Drive/GitProjects/TwitterWebApp/src/java/com/web/GAServlet.java</file>
             <file>file:/C:/Users/Fraser/Google%20Drive/GitProjects/TwitterWebApp/web/gaPage.jsp</file>
+            <file>file:/C:/Users/Fraser/Google%20Drive/GitProjects/TwitterWebApp/src/java/com/web/InitialServlet.java</file>
         </group>
     </open-files>
 </project-private>

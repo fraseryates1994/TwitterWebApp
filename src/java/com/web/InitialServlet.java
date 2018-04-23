@@ -44,13 +44,6 @@ public class InitialServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "ga":
-                JDBCWrapper wr = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/SocialMedia", "social", "fraz");
-                SocialMediaDB db = new SocialMediaDB(wr);
-
-                ArrayList<Results> results = db.getAllResults();
-                request.setAttribute("results", results);
-
-                // refresh page
                 RequestDispatcher view2 = request.getRequestDispatcher("gaPage.jsp");
                 view2.forward(request, response);
                 break;

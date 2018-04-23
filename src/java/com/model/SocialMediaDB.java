@@ -15,6 +15,18 @@ public class SocialMediaDB {
         wrapper = w;
     }
 
+    public void insertRequests(String name, String email, String request) {
+        wrapper.createStatement();
+        
+        int id = getMaxId("requests") + 1;
+        
+        try {
+            wrapper.getStatement().executeUpdate("insert into " + "requests" + "(name, email, request, id) values ('" + name + "','" + email + "','" + request + "'," + id + ")");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCWrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /*
     Name: getAllMembers
     Parameters: none
@@ -30,12 +42,14 @@ public class SocialMediaDB {
             do {
                 ret.add(wrapper.getResultSet().getString("swear"));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
-    
+
     public ArrayList<Results> getAllResults() {
         ArrayList ret = new ArrayList<Results>();
         wrapper.createStatement();
@@ -45,8 +59,10 @@ public class SocialMediaDB {
             do {
                 ret.add(new Results(wrapper.getResultSet().getString("ruleBase"), wrapper.getResultSet().getDouble("mutationRate"), wrapper.getResultSet().getInt("populationSize"), wrapper.getResultSet().getString("fitness")));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
@@ -60,8 +76,10 @@ public class SocialMediaDB {
             do {
                 ret.add(wrapper.getResultSet().getString("word"));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
@@ -75,8 +93,10 @@ public class SocialMediaDB {
             do {
                 ret.add(wrapper.getResultSet().getString("word"));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
@@ -90,8 +110,10 @@ public class SocialMediaDB {
             do {
                 ret.add(new Country(wrapper.getResultSet().getString("code"), wrapper.getResultSet().getString("name"), wrapper.getResultSet().getString("continentcode")));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
@@ -105,8 +127,10 @@ public class SocialMediaDB {
             do {
                 ret.add(new State(wrapper.getResultSet().getString("code"), wrapper.getResultSet().getString("name")));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
@@ -118,8 +142,10 @@ public class SocialMediaDB {
         try {
             Key ret = new Key(wrapper.getResultSet().getInt("id"), wrapper.getResultSet().getString("platform"), wrapper.getResultSet().getString("keyName"), wrapper.getResultSet().getString("keyValue"));
             return ret;
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -131,8 +157,10 @@ public class SocialMediaDB {
         try {
             Country ret = new Country(wrapper.getResultSet().getString("code"), wrapper.getResultSet().getString("name"), wrapper.getResultSet().getString("continentcode"));
             return ret;
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -146,8 +174,10 @@ public class SocialMediaDB {
             do {
                 ret.add(wrapper.getResultSet().getString("emoji"));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
@@ -161,8 +191,10 @@ public class SocialMediaDB {
             do {
                 ret.add(wrapper.getResultSet().getString("emoji"));
             } while (wrapper.getResultSet().next());
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return ret;
     }
@@ -192,8 +224,10 @@ public class SocialMediaDB {
             wrapper.getStatement().executeUpdate(sql);
 
             System.out.println("Created " + tableName + " table successfully");
+
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -204,9 +238,11 @@ public class SocialMediaDB {
                 wrapper.getStatement().executeUpdate("UPDATE " + tableName
                         + " SET classifier=" + entry.getValue()
                         + " WHERE id =" + entry.getKey());
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SocialMediaDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SocialMediaDB.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

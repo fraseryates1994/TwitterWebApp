@@ -9,6 +9,7 @@ import com.model.JDBCWrapper;
 import com.model.Results;
 import com.model.SocialMediaDB;
 import java.io.IOException;
+import com.model.Results;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -38,12 +39,33 @@ public class GAServlet extends HttpServlet {
         JDBCWrapper wr = new JDBCWrapper("org.apache.derby.jdbc.ClientDriver", "jdbc:derby://localhost:1527/SocialMedia", "social", "fraz");
         SocialMediaDB db = new SocialMediaDB(wr);
 
-        ArrayList<Results> results = db.getAllResults();
-        request.setAttribute("results", results);
+        String button = request.getParameter("button"); // Get value from button
+        switch (button) {
+            case "userRequest":
+                // Get inputs
+                String userInput = request.getParameter("userInput");
+                String userName = request.getParameter("userName");
+                String userEmail = request.getParameter("userEmail");
 
-        // refresh page
-        RequestDispatcher view2 = request.getRequestDispatcher("searchPage.jsp");
-        view2.forward(request, response);
+                // Insert requests
+                db.insertRequests(userName, userEmail, userInput);
+                request.setAttribute("complete", "Request Sent!");
+
+                // Refresh page
+                RequestDispatcher view = request.getRequestDispatcher("gaPage.jsp");
+                view.forward(request, response);
+                break;
+            case "previousResults":
+                ArrayList<Results> results = db.getAllResults();
+                request.setAttribute("results", results);
+
+                // refresh page
+                RequestDispatcher view2 = request.getRequestDispatcher("gaPage.jsp");
+                view2.forward(request, response);
+                break;
+            default:
+                break;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
